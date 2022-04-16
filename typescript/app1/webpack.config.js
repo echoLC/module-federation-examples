@@ -17,6 +17,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -27,15 +28,35 @@ module.exports = {
           presets: ['@babel/preset-react', '@babel/preset-typescript'],
         },
       },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
       name: 'app1',
       remotes: {
-        app2: 'app2@http://localhost:3002/remoteEntry.js',
+        app2: process.env.NODE_NV !== "production" ? 'app2@http://localhost:3002/remoteEntry.js' : 'app2@http://localhost:5002/remoteEntry.js',
       },
-      shared: ['react', 'react-dom'],
+      filename: 'remoteEntry.js',
+      exposes: {
+        './share': './src/share',
+        './Input': './src/components/Input',
+        './date': './src/utils/date',
+        './lodash': './src/utils/lodash',
+      },
+      shared: ['react', 'react-dom', 'antd', 'lodash', 'moment'],
+      shared: {
+        react: {},
+        'react-dom': {},
+        antd: {},
+        moment: {},
+        lodash: {
+          eager: true
+        }
+      }
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',

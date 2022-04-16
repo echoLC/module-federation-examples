@@ -17,6 +17,7 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -35,6 +36,9 @@ module.exports = {
       filename: 'remoteEntry.js',
       exposes: {
         './Button': './src/Button',
+      },
+      remotes: {
+        app1: process.env.NODE_NV !== "production" ? 'app1@http://localhost:5001/remoteEntry.js' : 'app1@http://localhost:5001/remoteEntry.js',
       },
       shared: ['react', 'react-dom'],
     }),

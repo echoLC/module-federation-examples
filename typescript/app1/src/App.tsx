@@ -1,4 +1,8 @@
 import * as React from 'react';
+import LocalButton from './components/Button'
+import { assign } from './utils/lodash'
+
+console.log(assign({a: 1}, { b: 2}))
 
 const RemoteButton = React.lazy(() => import('app2/Button'));
 
@@ -9,6 +13,7 @@ const App = () => (
     <React.Suspense fallback="Loading Button">
       <RemoteButton />
     </React.Suspense>
+    <LocalButton type="primary">Local Button</LocalButton>
   </div>
 );
 
