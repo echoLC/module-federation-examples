@@ -30,6 +30,7 @@
     "analyze": "source-map-explorer 'dist/*.js'"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "antd": "^4.19.5",
     "lodash": "^4.17.21",
     "moment": "^2.0.0",

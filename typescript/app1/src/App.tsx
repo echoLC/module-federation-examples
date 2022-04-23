@@ -1,6 +1,7 @@
 import * as React from 'react';
 import LocalButton from './components/Button'
 import { assign } from './utils/lodash'
+import { StarOutlined } from '@ant-design/icons'
 
 console.log(assign({a: 1}, { b: 2}))
 
@@ -14,6 +15,7 @@ const App = () => (
       <RemoteButton />
     </React.Suspense>
     <LocalButton type="primary">Local Button</LocalButton>
+    <StarOutlined />
   </div>
 );
 

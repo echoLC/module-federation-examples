@@ -47,7 +47,6 @@ module.exports = {
         './date': './src/utils/date',
         './lodash': './src/utils/lodash',
       },
-      shared: ['react', 'react-dom', 'antd', 'lodash', 'moment'],
       shared: {
         react: {},
         'react-dom': {},
@@ -55,6 +54,10 @@ module.exports = {
         moment: {},
         lodash: {
           eager: true
+        },
+        '@ant-design/icons': {
+          singleton: true,
+          requiredVersion: require('./package.json').dependencies['@ant-design/icons']
         }
       }
     }),
